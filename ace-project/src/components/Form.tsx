@@ -7,11 +7,14 @@ import { FormEvent } from 'react';
 interface InputField {
     inputFieldName: string;
     inputFieldValue: string;
+    inputFieldType: string;
 }
 interface FormProps {
+    formTitle: string;
     inputFieldList: InputField[];
+    message: string;
 }
-const Form = ({inputFieldList}: FormProps) => {
+const Form = ({formTitle, inputFieldList, message}: FormProps) => {
     
     const[inputState, setInputState] = useState(inputFieldList);
     // hook to keep track of the form state
@@ -30,48 +33,32 @@ const Form = ({inputFieldList}: FormProps) => {
             )
         );
       };
-
-
-
     
     // handle submission of the form
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        console.log("Submitted");
+        console.log("Submitted"); //placeholder. Replace later
+        console.log(inputState); // return the inputState dict
     };
 
     return (
         <form onSubmit={(e) => handleSubmit(e)}>
-            
+            <h2>{formTitle}</h2>
             {inputState.map((inputField, index) => (
                 <InputGroup
                     key={index}
                     id={inputField.inputFieldName}
-                    type="text"
+                    type={inputField.inputFieldType}
                     placeholder={`Enter your ${inputField.inputFieldName}...`}
                     labelText={inputField.inputFieldName}
                     required
                     onChange={handleInputChange}
                 />
             ))}
+            <p style={{fontSize: '12px',color:'red'}}>{message}</p>
             <Button id="SubmitBtn" color="primary" disabled={!isDone} type="submit">Submit</Button>
         </form>
     );
 };
 
 export default Form;
-
-    // Check if all required fields are filled out
-    // useEffect(() => {
-    //     const { fname, lname, email } = inputState;
-    //     const isDone = fname.trim() !== '' && lname.trim() !== '' && email.trim() !== '';
-    //     setIsDone(isDone);
-    //     console.log('isDone:', isDone); // Log the value of isDone
-    // }, [inputState]);
-
-        // hook to keep track of the inputs
-    // const [inputState, setInputState] = useState({
-    //     fname:'',
-    //     lname:'',
-    //     email:''
-    // })

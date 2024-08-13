@@ -17,7 +17,7 @@ const InputGroup = ({ type, labelText, placeholder, id, required, onChange}: Inp
         {required && <span className="text-danger">*</span>}
         {labelText}
       </label>
-      <div className='col-sm-3'>
+      <div>
         <input className='form-control' id={id} type={type} placeholder={placeholder} onChange={onChange}/>
       </div>
     </div>

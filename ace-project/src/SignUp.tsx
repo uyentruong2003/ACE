@@ -3,16 +3,18 @@ import Form from './components/Form'
 import { useState } from 'react'
 import styles from './Login.module.css'
 
-function Login() {
+function SignUp() {
   return (
     <>
       <div className={styles.background}></div>
       <div className = {`d-flex justify-content-center align-items-center ${styles.containerCustom}`}>
-        <Form formTitle="Login"
+        <Form formTitle="Sign Up"
           inputFieldList={[
+          {inputFieldName:"FirstName",inputFieldValue:"", inputFieldType:"text"},
+          {inputFieldName:"LastName",inputFieldValue:"", inputFieldType:"text"},
           {inputFieldName:"Email",inputFieldValue:"", inputFieldType:"email"},
           {inputFieldName:"Password",inputFieldValue:"",inputFieldType:"password"}]}
-          message="Incorrect email or password. Please try again">
+          message="Email already exists">
         </Form>
       </div>
     </>
@@ -20,4 +22,4 @@ function Login() {
   )
 }
 
-export default Login
+export default SignUp
