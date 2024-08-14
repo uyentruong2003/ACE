@@ -1,6 +1,6 @@
 .background {
     background-color: rgba(0, 0, 0, 0.229); /* 50% transparent black */
-    background-image: url("./assets/background.jpeg");
+    background-image: url("../assets/background.jpeg");
     background-size: cover;
     background-position: center;
     position: fixed; /* Ensure it covers the entire viewport */
@@ -22,6 +22,6 @@
     top: 50%; /* Position the top of the container at 50% of the viewport height */
     left: 50%; /* Position the left side of the container at 50% of the viewport width */
     transform: translate(-50%, -50%); /* Shift the container back by 50% of its width and height to center it */
-    max-width: 500px;
+    max-width: auto;
     justify-content: center;
 }

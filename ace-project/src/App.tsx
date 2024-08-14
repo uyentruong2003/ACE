@@ -1,7 +1,7 @@
 import React from 'react'
-import Login from './Login'
+import Login from './pages/Login'
 import { useState } from 'react'
-import SignUp from './SignUp'
+import SignUp from './pages/SignUp'
 
 const App = () => {
   

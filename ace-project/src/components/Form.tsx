@@ -1,20 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import InputGroup from './InputGroup';
 import Button from './Button';
+import Select from './Select';
 import { FormEvent } from 'react';
 
 // interface to pass in fields for the input group:
 interface InputField {
+    elementType: "input" | "select";
+    elementId: string;
+    inputFieldType?: string; //for input element: text, number, password, email, datetime-local,...
+    inputFieldOptions?: string[]; //for select element
     inputFieldName: string;
     inputFieldValue: string;
-    inputFieldType: string;
+    inputFieldMessage?: string;
 }
 interface FormProps {
     formTitle: string;
     inputFieldList: InputField[];
-    message: string;
 }
-const Form = ({formTitle, inputFieldList, message}: FormProps) => {
+const Form = ({formTitle, inputFieldList}: FormProps) => {
     
     const[inputState, setInputState] = useState(inputFieldList);
     // hook to keep track of the form state
@@ -24,12 +28,12 @@ const Form = ({formTitle, inputFieldList, message}: FormProps) => {
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const id = event.currentTarget.id; //get the id of the current input element
         const value = event.currentTarget.value; //get the value of the current input element
-        setInputState(prevState => 
+        setInputState(prevState => //prevState is the previouse inputFieldList
             // loop through the list of input fields
             prevState.map((inputField) =>
-                // if the name of the field is equal to the current element's id, update the field value with the current element's value
+                // if the id of the field is equal to the current element's id, update the field value with the current element's value
                 // else, keep it the same
-                inputField.inputFieldName === id ? {...inputField, inputFieldValue: value} : inputField
+                inputField.elementId === id ? {...inputField, inputFieldValue: value} : inputField
             )
         );
       };
@@ -41,21 +45,36 @@ const Form = ({formTitle, inputFieldList, message}: FormProps) => {
         console.log(inputState); // return the inputState dict
     };
 
+    // still need function to handle onSelect:
+
     return (
         <form onSubmit={(e) => handleSubmit(e)}>
             <h2>{formTitle}</h2>
             {inputState.map((inputField, index) => (
-                <InputGroup
-                    key={index}
-                    id={inputField.inputFieldName}
-                    type={inputField.inputFieldType}
-                    placeholder={`Enter your ${inputField.inputFieldName}...`}
-                    labelText={inputField.inputFieldName}
-                    required
-                    onChange={handleInputChange}
-                />
+                <div key={index}>
+                    {inputField.elementType === "input" && (
+                        <InputGroup
+                        id={inputField.elementId}
+                        type={inputField.inputFieldType || "text"} //default type is text
+                        placeholder={`Enter your ${inputField.inputFieldName}...`}
+                        labelText={inputField.inputFieldName}
+                        required
+                        onChange={handleInputChange}/>
+                    )}
+                    
+                    {inputField.elementType === "select" && (
+                        <Select
+                        id={inputField.elementId}
+                        labelText={inputField.inputFieldName}
+                        options={inputField.inputFieldOptions ? inputField.inputFieldOptions : []}
+                        required
+                        /* still need onSelect property added */> 
+                        </Select>
+                    )}
+
+                    <p style={{fontSize: '12px',color:'red'}}>{inputField.inputFieldMessage}</p>
+                </div>
             ))}
-            <p style={{fontSize: '12px',color:'red'}}>{message}</p>
             <Button id="SubmitBtn" color="primary" disabled={!isDone} type="submit">Submit</Button>
         </form>
     );
