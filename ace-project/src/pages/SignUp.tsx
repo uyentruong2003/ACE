@@ -7,14 +7,14 @@ function SignUp() {
   return (
     <>
       <div className={styles.background}></div>
-      <div className = {`d-flex justify-content-center align-items-center ${styles.containerCustom}`}>
+      <div className = {`d-flex justify-content-center align-items-center ${styles.popupContainer}`}>
         <Form formTitle="Sign Up"
-          inputFieldList={[
-          {elementId: "fname", elementType:"input", inputFieldName:"First Name",inputFieldValue:"", inputFieldType:"text"},
-          {elementId: "lname",elementType:"input", inputFieldName:"Last Name",inputFieldValue:"", inputFieldType:"text"},
-          {elementId: "email",elementType:"input", inputFieldName:"Email",inputFieldValue:"", inputFieldType:"email", inputFieldMessage:"Message for Email Input"},
-          {elementId: "password",elementType:"input", inputFieldName:"Password",inputFieldValue:"",inputFieldType:"password", inputFieldMessage:"Message for Password Input"},
-          // {elementId: "testing",elementType:"select", inputFieldName:"Testing",inputFieldValue:"",inputFieldOptions:["option1","option2","option3"], inputFieldMessage:"Message for Password Input"}
+          fieldList={[
+          {fieldId: "fname", fieldType:"input", fieldName:"First Name",fieldValue:"", inputType:"text"},
+          {fieldId: "lname",fieldType:"input", fieldName:"Last Name",fieldValue:"", inputType:"text"},
+          {fieldId: "email",fieldType:"input", fieldName:"Email",fieldValue:"", inputType:"email", fieldMessage:"Message for Email Input"},
+          {fieldId: "password",fieldType:"input", fieldName:"Password",fieldValue:"",inputType:"password", fieldMessage:"Message for Password Input"},
+          {fieldId: "testing",fieldType:"select", fieldName:"Testing",fieldValue:"",selectOptions:["option1","option2","option3"], fieldMessage:"Message for Password Input"}
         ]}>
         </Form>
       </div>

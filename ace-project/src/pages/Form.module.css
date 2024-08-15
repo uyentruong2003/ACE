@@ -12,7 +12,7 @@
     opacity: 60%;
 }
 
-.containerCustom {
+.popupContainer {
     border-color: gray;
     background-color: white;
     border-radius: 20px;
@@ -22,6 +22,20 @@
     top: 50%; /* Position the top of the container at 50% of the viewport height */
     left: 50%; /* Position the left side of the container at 50% of the viewport width */
     transform: translate(-50%, -50%); /* Shift the container back by 50% of its width and height to center it */
-    max-width: auto;
+    justify-content: center;
+}
+
+.standardContainer {
+    border-color: gray;
+    background-color: white;
+    border-radius: 20px;
+    display: flex;
+    max-width: 40%;
+    padding: 10px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    margin-left: 30%;
+    margin-top: 10%;
+    margin-bottom: 10%;
     justify-content: center;
 }

@@ -5,74 +5,83 @@ import Select from './Select';
 import { FormEvent } from 'react';
 
 // interface to pass in fields for the input group:
-interface InputField {
-    elementType: "input" | "select";
-    elementId: string;
-    inputFieldType?: string; //for input element: text, number, password, email, datetime-local,...
-    inputFieldOptions?: string[]; //for select element
-    inputFieldName: string;
-    inputFieldValue: string;
-    inputFieldMessage?: string;
+interface Field {
+    fieldType: "input" | "select";
+    fieldId: string;
+    inputType?: string; //for input element: text, number, password, email, datetime-local,...
+    selectOptions?: string[]; //for select element
+    fieldName: string;
+    fieldValue: string;
+    fieldMessage?: string;
+    required?: boolean;
 }
 interface FormProps {
     formTitle: string;
-    inputFieldList: InputField[];
+    fieldList: Field[];
 }
-const Form = ({formTitle, inputFieldList}: FormProps) => {
+const Form = ({formTitle, fieldList}: FormProps) => {
     
-    const[inputState, setInputState] = useState(inputFieldList);
+
+    // hook to keep track of the input change
+    const[inputValue, setInputValue] = useState(fieldList);
+    // update the inputValue hook whenever the input element is changed
+    const handleInputChange = (event: any) => {
+        const id = event.currentTarget.id; //get the id of the current input element
+        const value = event.currentTarget.value; //get the value of the current input element
+        setInputValue(prevState => //prevState is the previouse fieldList
+            // loop through the list of input fields
+            prevState.map((field) =>
+                // if the id of the field is equal to the current element's id, update the field value with the current element's value
+                // else, keep it the same
+                field.fieldId === id ? {...field, fieldValue: value} : field
+            )
+        );
+    };
+    // // hook to keep track of the select change
+    // const[selectValue, setSelectValue] = useState("");
+
+    // const handleSelected = (event: any) => {
+    //     const value = event.currentTarget.value;
+    //     setSelectValue(value);
+    //     handleInputChange(event);
+    // }
+    
     // hook to keep track of the form state
     const [isDone, setIsDone] = useState(true);
 
-    // update the inputState hook whenever the input element is changed
-    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const id = event.currentTarget.id; //get the id of the current input element
-        const value = event.currentTarget.value; //get the value of the current input element
-        setInputState(prevState => //prevState is the previouse inputFieldList
-            // loop through the list of input fields
-            prevState.map((inputField) =>
-                // if the id of the field is equal to the current element's id, update the field value with the current element's value
-                // else, keep it the same
-                inputField.elementId === id ? {...inputField, inputFieldValue: value} : inputField
-            )
-        );
-      };
-    
     // handle submission of the form
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         console.log("Submitted"); //placeholder. Replace later
-        console.log(inputState); // return the inputState dict
+        console.log(inputValue); //return the inputValue dict
     };
-
-    // still need function to handle onSelect:
 
     return (
         <form onSubmit={(e) => handleSubmit(e)}>
             <h2>{formTitle}</h2>
-            {inputState.map((inputField, index) => (
+            {inputValue.map((field, index) => (
                 <div key={index}>
-                    {inputField.elementType === "input" && (
+                    {field.fieldType === "input" && (
                         <InputGroup
-                        id={inputField.elementId}
-                        type={inputField.inputFieldType || "text"} //default type is text
-                        placeholder={`Enter your ${inputField.inputFieldName}...`}
-                        labelText={inputField.inputFieldName}
-                        required
+                        id={field.fieldId}
+                        type={field.inputType || "text"} //default type is text
+                        placeholder={`Enter your ${field.fieldName}...`}
+                        labelText={field.fieldName}
+                        required = {field.required}
                         onChange={handleInputChange}/>
                     )}
                     
-                    {inputField.elementType === "select" && (
+                    {field.fieldType === "select" && (
                         <Select
-                        id={inputField.elementId}
-                        labelText={inputField.inputFieldName}
-                        options={inputField.inputFieldOptions ? inputField.inputFieldOptions : []}
-                        required
-                        /* still need onSelect property added */> 
-                        </Select>
+                        id={field.fieldId}
+                        labelText={field.fieldName}
+                        options={field.selectOptions || []} //empty list if optionList don't exist
+                        required = {field.required}
+                        onSelect={handleInputChange}
+                        ></Select>
                     )}
 
-                    <p style={{fontSize: '12px',color:'red'}}>{inputField.inputFieldMessage}</p>
+                    <p style={{fontSize: '12px',color:'red'}}>{field.fieldMessage}</p>
                 </div>
             ))}
             <Button id="SubmitBtn" color="primary" disabled={!isDone} type="submit">Submit</Button>

@@ -1,12 +1,12 @@
 import React from 'react'
 import Login from './pages/Login'
-import { useState } from 'react'
 import SignUp from './pages/SignUp'
+import TripInfo from './pages/TripInfo'
 
 const App = () => {
   
   return (
-    <SignUp></SignUp>
+    <TripInfo></TripInfo>
   )
 }
 

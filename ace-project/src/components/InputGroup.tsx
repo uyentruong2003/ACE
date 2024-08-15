@@ -6,7 +6,7 @@ interface InputGroupProps {
   labelText: string;
   placeholder?: string;
   id: string;
-  required: boolean;
+  required?: boolean;
   onChange?: (event: any) => void;
 }
 
