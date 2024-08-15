@@ -12,7 +12,7 @@ interface InputGroupProps {
 
 const InputGroup = ({ type, labelText, placeholder, id, required, onChange}: InputGroupProps) => {
   return (
-    <div className='row'>
+    <div className="row">
       <label className='col-form-label' htmlFor={id}>
         {required && <span className="text-danger">*</span>}
         {labelText}

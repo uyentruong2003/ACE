@@ -7,7 +7,7 @@ function TripInfo() {
   return (
     <>
       <div className={styles.background}></div>
-      <div className = {`d-flex justify-content-center align-items-center ${styles.standardContainer}`}>
+      <div className = {`d-flex justify-content-center align-items-center ${styles.popupContainer}`}>
         <Form formTitle="Trip Information"
           fieldList={[
           {fieldId: "pickupTime", fieldType:"input",fieldName:"Pickup Time",fieldValue:"", inputType:"datetime-local", fieldMessage:"Message for Pickup Time Input"},

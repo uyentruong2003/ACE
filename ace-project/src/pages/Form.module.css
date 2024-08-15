@@ -12,29 +12,15 @@
     opacity: 60%;
 }
 
+
 .popupContainer {
     border-color: gray;
     background-color: white;
     border-radius: 20px;
     display: flex;
     padding: 40px;
-    position: absolute; /* Position the container absolutely relative to the viewport */
-    top: 50%; /* Position the top of the container at 50% of the viewport height */
-    left: 50%; /* Position the left side of the container at 50% of the viewport width */
-    transform: translate(-50%, -50%); /* Shift the container back by 50% of its width and height to center it */
-    justify-content: center;
-}
-
-.standardContainer {
-    border-color: gray;
-    background-color: white;
-    border-radius: 20px;
-    display: flex;
-    max-width: 40%;
-    padding: 10px;
-    padding-top: 40px;
-    padding-bottom: 40px;
-    margin-left: 30%;
+    width:max-content;
+    margin: 0 auto;
     margin-top: 10%;
     margin-bottom: 10%;
     justify-content: center;

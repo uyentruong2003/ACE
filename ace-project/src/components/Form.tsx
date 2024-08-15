@@ -16,10 +16,11 @@ interface Field {
     required?: boolean;
 }
 interface FormProps {
+    className?: string;
     formTitle: string;
     fieldList: Field[];
 }
-const Form = ({formTitle, fieldList}: FormProps) => {
+const Form = ({className, formTitle, fieldList}: FormProps) => {
     
 
     // hook to keep track of the input change
